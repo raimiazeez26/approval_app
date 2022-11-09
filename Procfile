@@ -1,1 +1,1 @@
-web: gunicorn approval_app:app
+web: gunicorn approval_app:server
