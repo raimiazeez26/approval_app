@@ -16,8 +16,7 @@ columns = ["symbol", "Lots", "Position", "Confluence", "Candlestick", "Zone In/O
 buy_sell_list = ["Buy", "Sell"]
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG]) #dbc.themes.ZEPHYR]
-
-
+server = app.server
 
 def layout_function():
     url = 'https://raw.githubusercontent.com/raimiazeez26/approval_app/main/approval.csv'
