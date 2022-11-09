@@ -175,6 +175,7 @@ def add_row(n_clicks, rows, columns):
     State('adding-rows-table', 'data'))
 
 def update_table(nclicks,table1):
+    url = 'https://raw.githubusercontent.com/raimiazeez26/approval_app/main/approval.csv'
     if nclicks == 0:
         raise PreventUpdate
     else:
