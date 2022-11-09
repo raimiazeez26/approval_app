@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 
 import pandas as pd
 import base64
@@ -26,8 +20,9 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG]) #dbc.themes.ZEPHY
 
 
 def layout_function():
+    url = 'https://raw.githubusercontent.com/raimiazeez26/approval_app/main/approval.csv'
     try:
-        data = pd.read_csv('approval.csv').to_dict('records')
+        data = pd.read_csv(url).to_dict('records')
     except:
         data=[
                 {}
@@ -184,11 +179,10 @@ def update_table(nclicks,table1):
     if nclicks == 0:
         raise PreventUpdate
     else:
-        pd.DataFrame(table1).to_csv('approval.csv', index=False)
+        pd.DataFrame(table1).to_csv(url, index=False)
         return "Request/Approval Sent"
     
     
 if __name__ == '__main__':
     # starts the server
-    app.run_server("192.168.0.102" ,port = 8080)
-
+    app.run_server("192.168.0.101" ,port = 8080)
