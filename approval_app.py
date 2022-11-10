@@ -187,4 +187,4 @@ def update_table(nclicks,table1):
     
 if __name__ == '__main__':
     # starts the server
-    app.run_server("192.168.0.101" ,port = 8080)
+    app.run_server()
