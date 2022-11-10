@@ -19,7 +19,8 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG]) #dbc.themes.ZEPHY
 server = app.server
 
 def layout_function():
-    url = 'https://raw.githubusercontent.com/raimiazeez26/approval_app/main/approval.csv'
+    #url = 'https://raw.githubusercontent.com/raimiazeez26/approval_app/main/approval.csv'
+    url = 'approval.csv'
     try:
         data = pd.read_csv(url).to_dict('records')
     except:
@@ -175,7 +176,8 @@ def add_row(n_clicks, rows, columns):
     State('adding-rows-table', 'data'))
 
 def update_table(nclicks,table1):
-    url = 'https://raw.githubusercontent.com/raimiazeez26/approval_app/main/approval.csv'
+    #url = 'https://raw.githubusercontent.com/raimiazeez26/approval_app/main/approval.csv'
+    url = 'approval.csv'
     if nclicks == 0:
         raise PreventUpdate
     else:
