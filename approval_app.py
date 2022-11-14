@@ -12,8 +12,9 @@ test_base64 = base64.b64encode(open(test_png, 'rb').read()).decode('ascii')
 
 columns = ["symbol", "Lots", "Position", "Confluence", "Candlestick", "Zone In/Out", 
                     "P/A Pattern", "Analyst", "Approval", "SL", "TP","Comment" ]
+buy_sell_list = ["Buy", "Sell"]
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG]) #dbc.themes.ZEPHYR]
 server = app.server
 
 app.layout = html.Div([
@@ -89,7 +90,12 @@ def update_table(nclicks,table1):
 )
 
 def update(n):
-
+    try:
+        data = pd.read_csv('approval.csv').to_dict('records')
+    except:
+        data=[
+                {}
+            ]
     return [
         dbc.Container([
                 dash_table.DataTable(
@@ -112,7 +118,7 @@ def update(n):
                 {'id': 'Comment', 'name': 'Comment'},
                            ],
 
-                data = pd.read_csv('approval.csv').to_dict('records'),
+                data = data,
                 editable=True,
                 row_deletable=True,
 
