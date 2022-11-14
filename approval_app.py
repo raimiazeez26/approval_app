@@ -12,7 +12,6 @@ test_base64 = base64.b64encode(open(test_png, 'rb').read()).decode('ascii')
 
 columns = ["symbol", "Lots", "Position", "Confluence", "Candlestick", "Zone In/Out", 
                     "P/A Pattern", "Analyst", "Approval", "SL", "TP","Comment" ]
-buy_sell_list = ["Buy", "Sell"]
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 server = app.server
