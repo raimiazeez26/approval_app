@@ -1,5 +1,3 @@
-#try with live update breakdown - Final DONE
-
 import pandas as pd
 import base64
 from dash import Dash, dash_table, dcc, html
