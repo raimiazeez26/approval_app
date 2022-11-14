@@ -13,6 +13,9 @@ test_base64 = base64.b64encode(open(test_png, 'rb').read()).decode('ascii')
 columns = ["symbol", "Lots", "Position", "Confluence", "Candlestick", "Zone In/Out", 
                     "P/A Pattern", "Analyst", "Approval", "SL", "TP","Comment" ]
 buy_sell_list = ["Buy", "Sell"]
+symbol_list = ["EURUSD", "AUDUSD", "USDCAD", "USDCHF", "AUDCAD", "CADCHF", "NZDUSD", "EURCAD", "AUDCHF", "GBPUSD",
+         "GBPCAD", "GBPNZD", "AUDNZD", "EURGBP", "EURNZD", "GBPCHF", "EURCHF", "EURAUD", "NZDCAD", "NZDCHF", "GBPAUD",
+        "GBPJPY", "CADJPY", "EURJPY", "AUDJPY", "NZDJPY","USDJPY","CHFJPY"]
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG]) #dbc.themes.ZEPHYR]
 server = app.server
@@ -100,11 +103,11 @@ def update(n):
         dbc.Container([
                 dash_table.DataTable(
                 id='adding-rows-table',
-                #css=[{"selector":".dropdown", "rule": "position: static"}],
-                css=[ { "selector": ".dash-spreadsheet-container .Select-value-label", "rule": "color: white" }, ],
+                css=[{"selector":".dropdown", "rule": "position: static", }],
+                #css=[ { "selector": ".dash-spreadsheet-container .Select-value-label", "rule": "color: white" }, ],
                 #css=( {"selector": ".Select-menu-outer", "rule": 'display : block !important'}),
 
-                columns = [{'id': 'Symbol', 'name': 'Symbol'},
+                columns = [{'id': 'Symbol', 'name': 'Symbol', 'presentation': 'dropdown'},
                 {'id': 'Lots', 'name': 'Lots'},
                 {'id': 'Position', 'name': 'Position', 'presentation': 'dropdown'},
                 {'id': 'Confluence', 'name': 'Confluence', 'presentation': 'dropdown'},
@@ -123,6 +126,12 @@ def update(n):
                 row_deletable=True,
 
                 dropdown={
+                'Symbol': {
+                    'options': [
+                        {'label': i, 'value': i}
+                        for i in symbol_list
+                    ]                 
+                },
                 'Position': {
                     'options': [
                         {'label': i, 'value': i}
