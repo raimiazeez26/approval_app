@@ -1,3 +1,5 @@
+#try with live update breakdown - Final DONE
+
 import pandas as pd
 import base64
 from dash import Dash, dash_table, dcc, html
@@ -16,8 +18,12 @@ buy_sell_list = ["Buy", "Sell"]
 symbol_list = ["EURUSD", "AUDUSD", "USDCAD", "USDCHF", "AUDCAD", "CADCHF", "NZDUSD", "EURCAD", "AUDCHF", "GBPUSD",
          "GBPCAD", "GBPNZD", "AUDNZD", "EURGBP", "EURNZD", "GBPCHF", "EURCHF", "EURAUD", "NZDCAD", "NZDCHF", "GBPAUD",
         "GBPJPY", "CADJPY", "EURJPY", "AUDJPY", "NZDJPY","USDJPY","CHFJPY"]
+tf_list = ["15M", "1H", "4H"]
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG]) #dbc.themes.ZEPHYR]
+
+external_stylesheets = ["assets/cyborg_bootstrap.css"]
+
+app = Dash(__name__, external_stylesheets=external_stylesheets) #[dbc.themes.CYBORG]) #dbc.themes.ZEPHYR]
 server = app.server
 
 app.layout = html.Div([
@@ -103,12 +109,16 @@ def update(n):
         dbc.Container([
                 dash_table.DataTable(
                 id='adding-rows-table',
-                css=[{"selector":".dropdown", "rule": "position: static", }],
-                #css=[ { "selector": ".dash-spreadsheet-container .Select-value-label", "rule": "color: white" }, ],
-                #css=( {"selector": ".Select-menu-outer", "rule": 'display : block !important'}),
-
+                data = data,
+                    
+                #css = [{'selector':'.dash-spreadsheet-inner-table','rule': 'text-color: white !important'}],
+                #css=[{"selector":".dropdown", "rule": "position: static" }, {"rule": "color: white !important" }],
+                #css=[ { "selector": ".dash-spreadsheet-container .Select-value-label", "rule": "color: white !important" }, ],
+                #css=[ {"selector": ".Select-menu-outer", "rule": 'display : block !important' } ],
+                    
                 columns = [{'id': 'Symbol', 'name': 'Symbol', 'presentation': 'dropdown'},
                 {'id': 'Lots', 'name': 'Lots'},
+                {'id': 'Timeframe', 'name': 'Timeframe', 'presentation': 'dropdown'},
                 {'id': 'Position', 'name': 'Position', 'presentation': 'dropdown'},
                 {'id': 'Confluence', 'name': 'Confluence', 'presentation': 'dropdown'},
                 {'id': 'Candlestick', 'name': 'Candlestick', 'presentation': 'dropdown'},
@@ -121,7 +131,6 @@ def update(n):
                 {'id': 'Comment', 'name': 'Comment'},
                            ],
 
-                data = data,
                 editable=True,
                 row_deletable=True,
 
@@ -132,6 +141,14 @@ def update(n):
                         for i in symbol_list
                     ]                 
                 },
+                    
+                'Timeframe': {
+                    'options': [
+                        {'label': i, 'value': i}
+                        for i in tf_list
+                    ]
+                },
+                    
                 'Position': {
                     'options': [
                         {'label': i, 'value': i}
