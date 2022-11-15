@@ -63,7 +63,7 @@ app.layout = html.Div([
                                 "height": "90vh", "maxHeight": "900vh"
                               }),
         
-        dcc.Interval(id='update', interval=25000, n_intervals=0)
+        dcc.Interval(id='update', interval=50000, n_intervals=0)
         
         ])
 
